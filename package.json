@@ -1,5 +1,5 @@
 {
-  "name": "wanderworks-backend",
+  "name": "wanderworks-backend",}
   "version": "1.0.0",
   "description": "Backend API for Wanderworks - scrap metal sourcing, marketplace, and project tracking",
   "main": "server.js",
