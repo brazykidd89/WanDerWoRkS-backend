@@ -59,4 +59,4 @@ router.post('/:id/lots', (req, res) => {
   if (!project) return res.status(404).json({ error: 'Project not found' });
 
   const lot = db.prepare('SELECT * FROM lots WHERE id = ?').get(lot_id);
-  if (!lot) return
+  if (!lot) return add uri-ruby-jenny
