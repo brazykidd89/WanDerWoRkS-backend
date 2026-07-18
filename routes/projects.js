@@ -43,4 +43,20 @@ router.put('/:id', (req, res) => {
   }
   const setClause = Object.keys(updates).map((k) => `${k} = @${k}`).join(', ');
   if (setClause) {
-    db.prepare(`UPDATE projects SET ${setClause}, upd
+    db.prepare(`UPDATE projects SET ${setClause}, updated_at = CURRENT_TIMESTAMP WHERE id = ?`).run(Object.values(updates), req.params.id);
+  }
+
+  const project = db.prepare('SELECT * FROM projects WHERE id = ?').get(req.params.id);
+  res.json(project);
+});
+
+router.delete('/:id', (req, res) => {
+  const existing = db.prepare('SELECT * FROM projects WHERE id = ?').get(req.params.id);
+  if (!existing) return res.status(404).json({ error: 'Project not found' });
+
+  db.prepare('DELETE FROM projects WHERE id = ?').run(req.params.id);
+  res.status(204).send();
+});
+
+module.exports = router;
+
